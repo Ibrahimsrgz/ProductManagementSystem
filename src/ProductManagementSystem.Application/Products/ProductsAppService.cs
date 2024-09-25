@@ -40,6 +40,7 @@ namespace ProductManagementSystem.Products
 
         }
 
+        [AllowAnonymous]
         public virtual async Task<PagedResultDto<ProductWithNavigationPropertiesDto>> GetListAsync(GetProductsInput input)
         {
             var totalCount = await _productRepository.GetCountAsync(input.FilterText, input.Name, input.Code, input.PriceMin, input.PriceMax, input.QuantityMin, input.QuantityMax, input.CurrencyId);
