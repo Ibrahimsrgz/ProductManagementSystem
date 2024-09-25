@@ -21,6 +21,11 @@ public class ProductManagementSystemPermissionDefinitionProvider : PermissionDef
         productPermission.AddChild(ProductManagementSystemPermissions.Products.Create, L("Permission:Create"));
         productPermission.AddChild(ProductManagementSystemPermissions.Products.Edit, L("Permission:Edit"));
         productPermission.AddChild(ProductManagementSystemPermissions.Products.Delete, L("Permission:Delete"));
+
+        var currencyPermission = myGroup.AddPermission(ProductManagementSystemPermissions.Currencies.Default, L("Permission:Currencies"));
+        currencyPermission.AddChild(ProductManagementSystemPermissions.Currencies.Create, L("Permission:Create"));
+        currencyPermission.AddChild(ProductManagementSystemPermissions.Currencies.Edit, L("Permission:Edit"));
+        currencyPermission.AddChild(ProductManagementSystemPermissions.Currencies.Delete, L("Permission:Delete"));
     }
 
     private static LocalizableString L(string name)

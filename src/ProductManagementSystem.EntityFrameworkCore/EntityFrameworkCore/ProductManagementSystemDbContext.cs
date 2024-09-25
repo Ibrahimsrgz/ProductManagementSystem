@@ -1,3 +1,4 @@
+using ProductManagementSystem.Currencies;
 using ProductManagementSystem.Products;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
@@ -30,6 +31,7 @@ public class ProductManagementSystemDbContext :
     ISaasDbContext,
     IIdentityProDbContext
 {
+    public DbSet<Currency> Currencies { get; set; } = null!;
     public DbSet<Product> Products { get; set; } = null!;
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
 
@@ -110,6 +112,22 @@ public class ProductManagementSystemDbContext :
                 b.Property(x => x.Code).HasColumnName(nameof(Product.Code)).IsRequired().HasMaxLength(ProductConsts.CodeMaxLength);
                 b.Property(x => x.Price).HasColumnName(nameof(Product.Price));
                 b.Property(x => x.Quantity).HasColumnName(nameof(Product.Quantity));
+            });
+
+        }
+        if (builder.IsHostDatabase())
+        {
+            builder.Entity<Currency>(b =>
+            {
+                b.ToTable(ProductManagementSystemConsts.DbTablePrefix + "Currency", ProductManagementSystemConsts.DbSchema);
+                b.ConfigureByConvention();
+                b.Property(x => x.Code).HasColumnName(nameof(Currency.Code)).IsRequired().HasMaxLength(CurrencyConsts.CodeMaxLength);
+                b.Property(x => x.Numeric).HasColumnName(nameof(Currency.Numeric));
+                b.Property(x => x.Name).HasColumnName(nameof(Currency.Name)).HasMaxLength(CurrencyConsts.NameMaxLength);
+                b.Property(x => x.Symbol).HasColumnName(nameof(Currency.Symbol)).HasMaxLength(CurrencyConsts.SymbolMaxLength);
+                b.Property(x => x.Country).HasColumnName(nameof(Currency.Country)).HasMaxLength(CurrencyConsts.CountryMaxLength);
+                b.Property(x => x.Active).HasColumnName(nameof(Currency.Active));
+                b.Property(x => x.Order).HasColumnName(nameof(Currency.Order));
             });
 
         }

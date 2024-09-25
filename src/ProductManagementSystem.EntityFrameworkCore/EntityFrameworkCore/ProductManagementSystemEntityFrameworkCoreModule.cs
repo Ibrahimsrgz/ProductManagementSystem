@@ -1,3 +1,4 @@
+using ProductManagementSystem.Currencies;
 using ProductManagementSystem.Products;
 using System;
 using Microsoft.Extensions.DependencyInjection;
@@ -52,6 +53,8 @@ public class ProductManagementSystemEntityFrameworkCoreModule : AbpModule
              * default repositories only for aggregate roots */
             options.AddDefaultRepositories(includeAllEntities: true);
             options.AddRepository<Product, Products.EfCoreProductRepository>();
+
+            options.AddRepository<Currency, Currencies.EfCoreCurrencyRepository>();
 
         });
 

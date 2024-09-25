@@ -1,3 +1,5 @@
+using ProductManagementSystem.Web.Pages.Currencies;
+using ProductManagementSystem.Currencies;
 using ProductManagementSystem.Web.Pages.Products;
 using Volo.Abp.AutoMapper;
 using ProductManagementSystem.Products;
@@ -14,5 +16,9 @@ public class ProductManagementSystemWebAutoMapperProfile : Profile
         CreateMap<ProductDto, ProductUpdateViewModel>();
         CreateMap<ProductUpdateViewModel, ProductUpdateDto>();
         CreateMap<ProductCreateViewModel, ProductCreateDto>();
+
+        CreateMap<CurrencyDto, CurrencyUpdateViewModel>();
+        CreateMap<CurrencyUpdateViewModel, CurrencyUpdateDto>();
+        CreateMap<CurrencyCreateViewModel, CurrencyCreateDto>();
     }
 }

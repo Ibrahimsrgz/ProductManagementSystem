@@ -72,6 +72,19 @@
     "MaxPrice": "Max Price",
     "MaxQuantity": "Max Quantity",
     "Menu:Products": "Products",
-    "Menu:ProductManagementSystem": "Product Management System"
+    "Menu:ProductManagementSystem": "Product Management System",
+    "Permission:Currencies": "Currencies",
+    "Currencies": "Currencies",
+    "NewCurrency": "New Currency",
+    "Numeric": "Numeric",
+    "Symbol": "Symbol",
+    "Country": "Country",
+    "Active": "Active",
+    "Order": "Order",
+    "MinNumeric": "Min Numeric",
+    "MinOrder": "Min Order",
+    "MaxNumeric": "Max Numeric",
+    "MaxOrder": "Max Order",
+    "Menu:Currencies": "Currencies"
   }
 }

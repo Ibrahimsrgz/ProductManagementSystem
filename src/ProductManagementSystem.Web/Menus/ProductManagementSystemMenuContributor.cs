@@ -114,6 +114,15 @@ public class ProductManagementSystemMenuContributor : IMenuContributor
 icon: "fa fa-file-alt",
                 requiredPermissionName: ProductManagementSystemPermissions.Products.Default)
         );
+
+        context.Menu.AddItem(
+            new ApplicationMenuItem(
+                ProductManagementSystemMenus.Currencies,
+                l["Menu:Currencies"],
+                url: "/Currencies",
+                icon: "fa fa-file-alt",
+                requiredPermissionName: ProductManagementSystemPermissions.Currencies.Default)
+        );
         return Task.CompletedTask;
     }
 

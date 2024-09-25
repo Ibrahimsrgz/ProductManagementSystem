@@ -187,6 +187,7 @@ public class ProductManagementSystemWebModule : AbpModule
             options.Conventions.AuthorizePage("/HostDashboard", ProductManagementSystemPermissions.Dashboard.Host);
             options.Conventions.AuthorizePage("/TenantDashboard", ProductManagementSystemPermissions.Dashboard.Tenant);
             options.Conventions.AuthorizePage("/Products/Index", ProductManagementSystemPermissions.Products.Default);
+            options.Conventions.AuthorizePage("/Currencies/Index", ProductManagementSystemPermissions.Currencies.Default);
         });
     }
 

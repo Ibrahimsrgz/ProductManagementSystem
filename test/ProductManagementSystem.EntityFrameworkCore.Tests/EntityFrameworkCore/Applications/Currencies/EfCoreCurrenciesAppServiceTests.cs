@@ -1,0 +1,8 @@
+using ProductManagementSystem.Currencies;
+using Xunit;
+
+namespace ProductManagementSystem.EntityFrameworkCore.Applications.Currencies;
+
+public class EfCoreCurrenciesAppServiceTests : CurrenciesAppServiceTests<ProductManagementSystemEntityFrameworkCoreTestModule>
+{
+}

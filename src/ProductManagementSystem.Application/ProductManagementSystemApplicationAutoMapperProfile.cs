@@ -1,3 +1,4 @@
+using ProductManagementSystem.Currencies;
 using System;
 using ProductManagementSystem.Shared;
 using Volo.Abp.AutoMapper;
@@ -16,5 +17,8 @@ public class ProductManagementSystemApplicationAutoMapperProfile : Profile
 
         CreateMap<Product, ProductDto>();
         CreateMap<Product, ProductExcelDto>();
+
+        CreateMap<Currency, CurrencyDto>();
+        CreateMap<Currency, CurrencyExcelDto>();
     }
 }

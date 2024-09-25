@@ -12,4 +12,6 @@ public class ProductManagementSystemMenus
 
     public const string Products = Prefix + ".Products";
 
+    public const string Currencies = Prefix + ".Currencies";
+
 }
