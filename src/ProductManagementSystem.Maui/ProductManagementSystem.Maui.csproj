@@ -36,7 +36,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProductManagementSystem.HttpApi.Client\ProductManagementSystem.HttpApi.Client.csproj"/>
+    <ProjectReference Include="..\ProductManagementSystem.HttpApi.Client\ProductManagementSystem.HttpApi.Client.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,39 +46,39 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2"/>
-    <PackageReference Include="CommunityToolkit.Maui" Version="7.0.0"/>
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0"/>
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.4"/>
-    <PackageReference Include="IdentityModel.OidcClient" Version="5.2.1"/>
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3"/>
-    <PackageReference Include="UraniumUI.Icons.MaterialIcons" Version="2.5.6"/>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="CommunityToolkit.Maui" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.4" />
+    <PackageReference Include="IdentityModel.OidcClient" Version="5.2.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
+    <PackageReference Include="UraniumUI.Icons.MaterialIcons" Version="2.5.6" />
   </ItemGroup>
 
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
-    <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.49-beta"/>
+    <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.49-beta" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- App Icon -->
-    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" ForegroundScale="0.75" Color="#292D33"/>
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" ForegroundScale="0.75" Color="#292D33" />
 
     <!-- Splash Screen -->
-    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#292D33" BaseSize="128,128"/>
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#292D33" BaseSize="128,128" />
 
     <!-- Images -->
-    <MauiImage Include="Resources\Images\*"/>
+    <MauiImage Include="Resources\Images\*" />
 
     <!-- Fonts -->
-    <MauiFont Include="Resources\Fonts\*"/>
+    <MauiFont Include="Resources\Fonts\*" />
 
     <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)"/>
+    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.json"/>
-    <EmbeddedResource Include="appsettings.json"/>
+    <None Remove="appsettings.json" />
+    <EmbeddedResource Include="appsettings.json" />
   </ItemGroup>
 
   <!-- Build Properties must be defined within these property groups to ensure successful publishing
@@ -91,5 +91,7 @@
     <CodesignEntitlements>Platforms/MacCatalyst/Entitlements.Release.plist</CodesignEntitlements>
     <UseHardenedRuntime>true</UseHardenedRuntime>
   </PropertyGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionProductManagementSystemMauiHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>
