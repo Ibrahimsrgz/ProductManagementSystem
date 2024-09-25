@@ -1,3 +1,4 @@
+using ProductManagementSystem.Products;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -29,8 +30,8 @@ public class ProductManagementSystemDbContext :
     ISaasDbContext,
     IIdentityProDbContext
 {
+    public DbSet<Product> Products { get; set; } = null!;
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
-
 
     #region Entities from the modules
 
@@ -86,7 +87,7 @@ public class ProductManagementSystemDbContext :
         builder.ConfigureTextTemplateManagement();
         builder.ConfigureGdpr();
         builder.ConfigureBlobStoring();
-        
+
         /* Configure your own tables/entities inside here */
 
         //builder.Entity<YourEntity>(b =>
@@ -95,5 +96,22 @@ public class ProductManagementSystemDbContext :
         //    b.ConfigureByConvention(); //auto configure for the base class props
         //    //...
         //});
+        if (builder.IsHostDatabase())
+        {
+
+        }
+        if (builder.IsHostDatabase())
+        {
+            builder.Entity<Product>(b =>
+            {
+                b.ToTable(ProductManagementSystemConsts.DbTablePrefix + "Product", ProductManagementSystemConsts.DbSchema);
+                b.ConfigureByConvention();
+                b.Property(x => x.Name).HasColumnName(nameof(Product.Name)).IsRequired().HasMaxLength(ProductConsts.NameMaxLength);
+                b.Property(x => x.Code).HasColumnName(nameof(Product.Code)).IsRequired().HasMaxLength(ProductConsts.CodeMaxLength);
+                b.Property(x => x.Price).HasColumnName(nameof(Product.Price));
+                b.Property(x => x.Quantity).HasColumnName(nameof(Product.Quantity));
+            });
+
+        }
     }
 }

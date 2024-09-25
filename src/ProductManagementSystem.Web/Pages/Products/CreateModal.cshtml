@@ -1,0 +1,50 @@
+@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using ProductManagementSystem.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@using ProductManagementSystem.Web.Pages.Products
+@using ProductManagementSystem.Products;
+@using System.Globalization
+@inject IHtmlLocalizer<ProductManagementSystemResource> L
+@model CreateModalModel
+@{
+    Layout = null;
+}
+
+
+<form data-ajaxForm="true" asp-page="/Products/CreateModal" autocomplete="off">
+    <abp-modal id="ProductCreateModal">
+        <abp-modal-header title="@L["NewProduct"].Value"></abp-modal-header>
+
+        <abp-modal-body>
+@*//<suite-custom-code-block-1>*@
+@*//</suite-custom-code-block-1>*@
+                
+                    
+                    
+
+            <abp-input asp-for="Product.Name"    />
+
+
+            <abp-input asp-for="Product.Code"    />
+
+
+            <abp-input asp-for="Product.Price"   data-val="false" />
+
+
+            <abp-input asp-for="Product.Quantity"    />
+
+                    
+                
+@*//<suite-custom-code-block-2>*@
+@*//</suite-custom-code-block-2>*@
+@*//<suite-custom-code-block-3>*@
+@*//</suite-custom-code-block-3>*@
+        </abp-modal-body>
+
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)">
+@*//<suite-custom-code-block-4>*@
+@*//</suite-custom-code-block-4>*@
+        </abp-modal-footer>
+    </abp-modal>
+</form>
