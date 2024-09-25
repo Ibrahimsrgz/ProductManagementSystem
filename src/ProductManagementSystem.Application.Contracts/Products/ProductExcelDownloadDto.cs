@@ -15,6 +15,7 @@ namespace ProductManagementSystem.Products
         public decimal? PriceMax { get; set; }
         public int? QuantityMin { get; set; }
         public int? QuantityMax { get; set; }
+        public Guid? CurrencyId { get; set; }
 
         public ProductExcelDownloadDtoBase()
         {

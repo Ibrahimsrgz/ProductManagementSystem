@@ -29,8 +29,8 @@ namespace ProductManagementSystem.Products
             // Assert
             result.TotalCount.ShouldBe(2);
             result.Items.Count.ShouldBe(2);
-            result.Items.Any(x => x.Id == 1).ShouldBe(true);
-            result.Items.Any(x => x.Id == 2).ShouldBe(true);
+            result.Items.Any(x => x.Product.Id == 1).ShouldBe(true);
+            result.Items.Any(x => x.Product.Id == 2).ShouldBe(true);
         }
 
         [Fact]
@@ -50,10 +50,11 @@ namespace ProductManagementSystem.Products
             // Arrange
             var input = new ProductCreateDto
             {
-                Name = "a4c9f0a11beb415484b762b517ec40708556425628ea4235842ca4128ce33df2d5b27cb647844aabad54a58a317af0cde28e",
-                Code = "ac00eabdec",
-                Price = 1198045759,
-                Quantity = 1219000513
+                Name = "0cc6495ad5fa41a8b26de12ee3c4bbef2c6ba40ddfb347ed826264ba4de25eca4a8ef2bdfda649e8a9d0c7cb3a11940c6fbd",
+                Code = "896f0ea13f",
+                Price = 560648261,
+                Quantity = 479221319,
+                CurrencyId = Guid.Parse("9a2f6900-5be0-4499-8583-96f994c2ddd6")
             };
 
             // Act
@@ -63,10 +64,10 @@ namespace ProductManagementSystem.Products
             var result = await _productRepository.FindAsync(c => c.Name == serviceResult.Name);
 
             result.ShouldNotBe(null);
-            result.Name.ShouldBe("a4c9f0a11beb415484b762b517ec40708556425628ea4235842ca4128ce33df2d5b27cb647844aabad54a58a317af0cde28e");
-            result.Code.ShouldBe("ac00eabdec");
-            result.Price.ShouldBe(1198045759);
-            result.Quantity.ShouldBe(1219000513);
+            result.Name.ShouldBe("0cc6495ad5fa41a8b26de12ee3c4bbef2c6ba40ddfb347ed826264ba4de25eca4a8ef2bdfda649e8a9d0c7cb3a11940c6fbd");
+            result.Code.ShouldBe("896f0ea13f");
+            result.Price.ShouldBe(560648261);
+            result.Quantity.ShouldBe(479221319);
         }
 
         [Fact]
@@ -75,10 +76,11 @@ namespace ProductManagementSystem.Products
             // Arrange
             var input = new ProductUpdateDto()
             {
-                Name = "0a173dc915a844f2b441f8add019f023547df9ea9741468f99fb9a0bb9e2189475fb92ef4e794995b43c0dc18270836152b0",
-                Code = "1138d2d8d2",
-                Price = 404773372,
-                Quantity = 1336379877
+                Name = "28f98bd621854eb789f8006f79c9d6495a0bcb612d1743608ee0062d221b6907242bcee88de44139a4056d9d3c7570be1edf",
+                Code = "f8c524a5d3",
+                Price = 59718018,
+                Quantity = 1743921018,
+                CurrencyId = Guid.Parse("9a2f6900-5be0-4499-8583-96f994c2ddd6")
             };
 
             // Act
@@ -88,10 +90,10 @@ namespace ProductManagementSystem.Products
             var result = await _productRepository.FindAsync(c => c.Id == serviceResult.Id);
 
             result.ShouldNotBe(null);
-            result.Name.ShouldBe("0a173dc915a844f2b441f8add019f023547df9ea9741468f99fb9a0bb9e2189475fb92ef4e794995b43c0dc18270836152b0");
-            result.Code.ShouldBe("1138d2d8d2");
-            result.Price.ShouldBe(404773372);
-            result.Quantity.ShouldBe(1336379877);
+            result.Name.ShouldBe("28f98bd621854eb789f8006f79c9d6495a0bcb612d1743608ee0062d221b6907242bcee88de44139a4056d9d3c7570be1edf");
+            result.Code.ShouldBe("f8c524a5d3");
+            result.Price.ShouldBe(59718018);
+            result.Quantity.ShouldBe(1743921018);
         }
 
         [Fact]

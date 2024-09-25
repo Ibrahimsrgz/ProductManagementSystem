@@ -1,3 +1,5 @@
+using ProductManagementSystem.Shared;
+using ProductManagementSystem.Currencies;
 using System;
 using System.IO;
 using System.Linq;
@@ -28,29 +30,53 @@ namespace ProductManagementSystem.Products
         protected IProductRepository _productRepository;
         protected ProductManager _productManager;
 
-        public ProductsAppServiceBase(IProductRepository productRepository, ProductManager productManager, IDistributedCache<ProductDownloadTokenCacheItem, string> downloadTokenCache)
+        protected IRepository<ProductManagementSystem.Currencies.Currency, Guid> _currencyRepository;
+
+        public ProductsAppServiceBase(IProductRepository productRepository, ProductManager productManager, IDistributedCache<ProductDownloadTokenCacheItem, string> downloadTokenCache, IRepository<ProductManagementSystem.Currencies.Currency, Guid> currencyRepository)
         {
             _downloadTokenCache = downloadTokenCache;
             _productRepository = productRepository;
-            _productManager = productManager;
+            _productManager = productManager; _currencyRepository = currencyRepository;
 
         }
 
-        public virtual async Task<PagedResultDto<ProductDto>> GetListAsync(GetProductsInput input)
+        public virtual async Task<PagedResultDto<ProductWithNavigationPropertiesDto>> GetListAsync(GetProductsInput input)
         {
-            var totalCount = await _productRepository.GetCountAsync(input.FilterText, input.Name, input.Code, input.PriceMin, input.PriceMax, input.QuantityMin, input.QuantityMax);
-            var items = await _productRepository.GetListAsync(input.FilterText, input.Name, input.Code, input.PriceMin, input.PriceMax, input.QuantityMin, input.QuantityMax, input.Sorting, input.MaxResultCount, input.SkipCount);
+            var totalCount = await _productRepository.GetCountAsync(input.FilterText, input.Name, input.Code, input.PriceMin, input.PriceMax, input.QuantityMin, input.QuantityMax, input.CurrencyId);
+            var items = await _productRepository.GetListWithNavigationPropertiesAsync(input.FilterText, input.Name, input.Code, input.PriceMin, input.PriceMax, input.QuantityMin, input.QuantityMax, input.CurrencyId, input.Sorting, input.MaxResultCount, input.SkipCount);
 
-            return new PagedResultDto<ProductDto>
+            return new PagedResultDto<ProductWithNavigationPropertiesDto>
             {
                 TotalCount = totalCount,
-                Items = ObjectMapper.Map<List<Product>, List<ProductDto>>(items)
+                Items = ObjectMapper.Map<List<ProductWithNavigationProperties>, List<ProductWithNavigationPropertiesDto>>(items)
             };
+        }
+
+        public virtual async Task<ProductWithNavigationPropertiesDto> GetWithNavigationPropertiesAsync(long id)
+        {
+            return ObjectMapper.Map<ProductWithNavigationProperties, ProductWithNavigationPropertiesDto>
+                (await _productRepository.GetWithNavigationPropertiesAsync(id));
         }
 
         public virtual async Task<ProductDto> GetAsync(long id)
         {
             return ObjectMapper.Map<Product, ProductDto>(await _productRepository.GetAsync(id));
+        }
+
+        public virtual async Task<PagedResultDto<LookupDto<Guid>>> GetCurrencyLookupAsync(LookupRequestDto input)
+        {
+            var query = (await _currencyRepository.GetQueryableAsync())
+                .WhereIf(!string.IsNullOrWhiteSpace(input.Filter),
+                    x => x.Name != null &&
+                         x.Name.Contains(input.Filter));
+
+            var lookupData = await query.PageBy(input.SkipCount, input.MaxResultCount).ToDynamicListAsync<ProductManagementSystem.Currencies.Currency>();
+            var totalCount = query.Count();
+            return new PagedResultDto<LookupDto<Guid>>
+            {
+                TotalCount = totalCount,
+                Items = ObjectMapper.Map<List<ProductManagementSystem.Currencies.Currency>, List<LookupDto<Guid>>>(lookupData)
+            };
         }
 
         [Authorize(ProductManagementSystemPermissions.Products.Delete)]
@@ -62,9 +88,13 @@ namespace ProductManagementSystem.Products
         [Authorize(ProductManagementSystemPermissions.Products.Create)]
         public virtual async Task<ProductDto> CreateAsync(ProductCreateDto input)
         {
+            if (input.CurrencyId == default)
+            {
+                throw new UserFriendlyException(L["The {0} field is required.", L["Currency"]]);
+            }
 
             var product = await _productManager.CreateAsync(
-            input.Name, input.Code, input.Price, input.Quantity
+            input.CurrencyId, input.Name, input.Code, input.Price, input.Quantity
             );
 
             return ObjectMapper.Map<Product, ProductDto>(product);
@@ -73,10 +103,14 @@ namespace ProductManagementSystem.Products
         [Authorize(ProductManagementSystemPermissions.Products.Edit)]
         public virtual async Task<ProductDto> UpdateAsync(long id, ProductUpdateDto input)
         {
+            if (input.CurrencyId == default)
+            {
+                throw new UserFriendlyException(L["The {0} field is required.", L["Currency"]]);
+            }
 
             var product = await _productManager.UpdateAsync(
             id,
-            input.Name, input.Code, input.Price, input.Quantity, input.ConcurrencyStamp
+            input.CurrencyId, input.Name, input.Code, input.Price, input.Quantity, input.ConcurrencyStamp
             );
 
             return ObjectMapper.Map<Product, ProductDto>(product);
@@ -91,26 +125,25 @@ namespace ProductManagementSystem.Products
                 throw new AbpAuthorizationException("Invalid download token: " + input.DownloadToken);
             }
 
-            var items = await _productRepository.GetListAsync(input.FilterText, input.Name, input.Code, input.PriceMin, input.PriceMax, input.QuantityMin, input.QuantityMax);
+            var products = await _productRepository.GetListWithNavigationPropertiesAsync(input.FilterText, input.Name, input.Code, input.PriceMin, input.PriceMax, input.QuantityMin, input.QuantityMax, input.CurrencyId);
+            var items = products.Select(item => new
+            {
+                Name = item.Product.Name,
+                Code = item.Product.Code,
+                Price = item.Product.Price,
+                Quantity = item.Product.Quantity,
+
+                Currency = item.Currency?.Name,
+
+            });
 
             var memoryStream = new MemoryStream();
-            await memoryStream.SaveAsAsync(ObjectMapper.Map<List<Product>, List<ProductExcelDto>>(items));
+            await memoryStream.SaveAsAsync(items);
             memoryStream.Seek(0, SeekOrigin.Begin);
 
             return new RemoteStreamContent(memoryStream, "Products.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
-        [Authorize(ProductManagementSystemPermissions.Products.Delete)]
-        public virtual async Task DeleteByIdsAsync(List<long> productIds)
-        {
-            await _productRepository.DeleteManyAsync(productIds);
-        }
-
-        [Authorize(ProductManagementSystemPermissions.Products.Delete)]
-        public virtual async Task DeleteAllAsync(GetProductsInput input)
-        {
-            await _productRepository.DeleteAllAsync(input.FilterText, input.Name, input.Code, input.PriceMin, input.PriceMax, input.QuantityMin, input.QuantityMax);
-        }
         public virtual async Task<ProductManagementSystem.Shared.DownloadTokenResultDto> GetDownloadTokenAsync()
         {
             var token = Guid.NewGuid().ToString("N");

@@ -25,8 +25,8 @@ namespace ProductManagementSystem.EntityFrameworkCore.Domains.Products
             {
                 // Act
                 var result = await _productRepository.GetListAsync(
-                    name: "e4251926d5734d70adf54485a5f3993e7c945b4c8c334e0b8f437a777358c5924e876092acaa497b890884f76c748a56f6dc",
-                    code: "01ddd2469c"
+                    name: "941b003a948a426cbda5386d5d12b5bc1c6783e71c8e45c0b9e72b7f96fba97616e39b8eec4443d8a42d1394c6a681a554fe",
+                    code: "63cf2c0228"
                 );
 
                 // Assert
@@ -44,8 +44,8 @@ namespace ProductManagementSystem.EntityFrameworkCore.Domains.Products
             {
                 // Act
                 var result = await _productRepository.GetCountAsync(
-                    name: "41d3f19511044233b2ba9658283524ebe3141284b512499c9e3419accc90c64801f710ac256248b8b88d5582a69d401ee628",
-                    code: "7397902b8c"
+                    name: "0f2a1f00e4a34148845d9ca00e4638165132ab71c59944e4bd3282a355c6996db8e45cd189654e6198cc33e96963c59a3cd7",
+                    code: "e2d7083d16"
                 );
 
                 // Assert

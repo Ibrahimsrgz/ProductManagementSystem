@@ -16,6 +16,10 @@ namespace ProductManagementSystem.Web.Pages.Products
         [BindProperty]
         public ProductCreateViewModel Product { get; set; }
 
+        public List<SelectListItem> CurrencyLookupListRequired { get; set; } = new List<SelectListItem>
+        {
+        };
+
         protected IProductsAppService _productsAppService;
 
         public CreateModalModelBase(IProductsAppService productsAppService)
@@ -28,6 +32,12 @@ namespace ProductManagementSystem.Web.Pages.Products
         public virtual async Task OnGetAsync()
         {
             Product = new ProductCreateViewModel();
+            CurrencyLookupListRequired.AddRange((
+                                    await _productsAppService.GetCurrencyLookupAsync(new LookupRequestDto
+                                    {
+                                        MaxResultCount = LimitedResultRequestDto.MaxMaxResultCount
+                                    })).Items.Select(t => new SelectListItem(t.DisplayName, t.Id.ToString())).ToList()
+                        );
 
             await Task.CompletedTask;
         }

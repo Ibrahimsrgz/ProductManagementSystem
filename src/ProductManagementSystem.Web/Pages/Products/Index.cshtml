@@ -76,42 +76,25 @@
             <abp-column size="_3">
                 <abp-input asp-for="QuantityFilterMax" label="@L["MaxQuantity"].Value" />
             </abp-column>
+            <abp-column size="_3">
+                <abp-select asp-for="CurrencyIdFilter" label="@L["Currency"].Value" />
+            </abp-column>
 @*//<suite-custom-code-block-5>*@
 @*//</suite-custom-code-block-5>*@
         </abp-row>
-        
-        <div id="bulk-delete-context-menu" class="d-none">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <p class="lead mb-0 d-none" id="items-selected-info-message"></p>
-                            
-                <div>
-                    <button class="btn btn-outline-secondary d-none mx-1" id="select-all-items-btn"></button>
-                                
-                    <button class="btn btn-outline-secondary d-none mx-1" id="clear-selection-btn">
-                        @L["ClearSelection"]
-                    </button>
-                                
-                    <button class="btn btn-danger mx-1" id="delete-selected-items">
-                        <i class="fa fa-trash"></i> @L["Delete"]
-                    </button>
-                </div>
-                
-            </div>
-            
-            <hr class="my-1 mx-0"/>
-        </div>
+
 
         <abp-table striped-rows="true" id="ProductsTable">
             <thead>
 				<tr>
-				    <th id="BulkDeleteCheckboxTheader"><input type="checkbox" id="select_all" class="form-check-input" /></th>
+				    
 				    
 					<th>@L["Actions"]</th>
 					<th>@L["Name"]</th>
 					<th>@L["Code"]</th>
 					<th>@L["Price"]</th>
 					<th>@L["Quantity"]</th>
-
+					<th>@L["Currency"]</th>
 @*//<suite-custom-code-block-6>*@
 @*//</suite-custom-code-block-6>*@
 				</tr>

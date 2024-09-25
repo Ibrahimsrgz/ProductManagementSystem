@@ -20,5 +20,8 @@ public class ProductManagementSystemApplicationAutoMapperProfile : Profile
 
         CreateMap<Currency, CurrencyDto>();
         CreateMap<Currency, CurrencyExcelDto>();
+
+        CreateMap<ProductWithNavigationProperties, ProductWithNavigationPropertiesDto>();
+        CreateMap<Currency, LookupDto<Guid>>().ForMember(dest => dest.DisplayName, opt => opt.MapFrom(src => src.Name));
     }
 }

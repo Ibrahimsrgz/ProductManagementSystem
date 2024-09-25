@@ -20,8 +20,9 @@ namespace ProductManagementSystem.Products
         }
 
         public virtual async Task<Product> CreateAsync(
-        string name, string code, decimal price, int quantity)
+        Guid currencyId, string name, string code, decimal price, int quantity)
         {
+            Check.NotNull(currencyId, nameof(currencyId));
             Check.NotNullOrWhiteSpace(name, nameof(name));
             Check.Length(name, nameof(name), ProductConsts.NameMaxLength);
             Check.NotNullOrWhiteSpace(code, nameof(code));
@@ -29,7 +30,7 @@ namespace ProductManagementSystem.Products
 
             var product = new Product(
 
-             name, code, price, quantity
+             currencyId, name, code, price, quantity
              );
 
             return await _productRepository.InsertAsync(product);
@@ -37,9 +38,10 @@ namespace ProductManagementSystem.Products
 
         public virtual async Task<Product> UpdateAsync(
             long id,
-            string name, string code, decimal price, int quantity, [CanBeNull] string? concurrencyStamp = null
+            Guid currencyId, string name, string code, decimal price, int quantity, [CanBeNull] string? concurrencyStamp = null
         )
         {
+            Check.NotNull(currencyId, nameof(currencyId));
             Check.NotNullOrWhiteSpace(name, nameof(name));
             Check.Length(name, nameof(name), ProductConsts.NameMaxLength);
             Check.NotNullOrWhiteSpace(code, nameof(code));
@@ -47,6 +49,7 @@ namespace ProductManagementSystem.Products
 
             var product = await _productRepository.GetAsync(id);
 
+            product.CurrencyId = currencyId;
             product.Name = name;
             product.Code = code;
             product.Price = price;

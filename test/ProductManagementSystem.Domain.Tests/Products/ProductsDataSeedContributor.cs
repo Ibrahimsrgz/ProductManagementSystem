@@ -1,3 +1,4 @@
+using ProductManagementSystem.Currencies;
 using System;
 using System.Threading.Tasks;
 using Volo.Abp.Data;
@@ -12,12 +13,13 @@ namespace ProductManagementSystem.Products
         private bool IsSeeded = false;
         private readonly IProductRepository _productRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
+        private readonly CurrenciesDataSeedContributor _currenciesDataSeedContributor;
 
-        public ProductsDataSeedContributor(IProductRepository productRepository, IUnitOfWorkManager unitOfWorkManager)
+        public ProductsDataSeedContributor(IProductRepository productRepository, IUnitOfWorkManager unitOfWorkManager, CurrenciesDataSeedContributor currenciesDataSeedContributor)
         {
             _productRepository = productRepository;
             _unitOfWorkManager = unitOfWorkManager;
-
+            _currenciesDataSeedContributor = currenciesDataSeedContributor;
         }
 
         public async Task SeedAsync(DataSeedContext context)
@@ -27,20 +29,24 @@ namespace ProductManagementSystem.Products
                 return;
             }
 
+            await _currenciesDataSeedContributor.SeedAsync(context);
+
             await _productRepository.InsertAsync(new Product
             (
-                name: "e4251926d5734d70adf54485a5f3993e7c945b4c8c334e0b8f437a777358c5924e876092acaa497b890884f76c748a56f6dc",
-                code: "01ddd2469c",
-                price: 789244552,
-                quantity: 1665247642
+                name: "941b003a948a426cbda5386d5d12b5bc1c6783e71c8e45c0b9e72b7f96fba97616e39b8eec4443d8a42d1394c6a681a554fe",
+                code: "63cf2c0228",
+                price: 883826256,
+                quantity: 462196643,
+                currencyId: Guid.Parse("9a2f6900-5be0-4499-8583-96f994c2ddd6")
             ));
 
             await _productRepository.InsertAsync(new Product
             (
-                name: "41d3f19511044233b2ba9658283524ebe3141284b512499c9e3419accc90c64801f710ac256248b8b88d5582a69d401ee628",
-                code: "7397902b8c",
-                price: 2000021051,
-                quantity: 237450434
+                name: "0f2a1f00e4a34148845d9ca00e4638165132ab71c59944e4bd3282a355c6996db8e45cd189654e6198cc33e96963c59a3cd7",
+                code: "e2d7083d16",
+                price: 702347561,
+                quantity: 867475868,
+                currencyId: Guid.Parse("9a2f6900-5be0-4499-8583-96f994c2ddd6")
             ));
 
             await _unitOfWorkManager!.Current!.SaveChangesAsync();

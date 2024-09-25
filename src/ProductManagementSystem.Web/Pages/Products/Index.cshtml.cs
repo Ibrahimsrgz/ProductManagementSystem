@@ -22,6 +22,12 @@ namespace ProductManagementSystem.Web.Pages.Products
         public int? QuantityFilterMin { get; set; }
 
         public int? QuantityFilterMax { get; set; }
+        [SelectItems(nameof(CurrencyLookupList))]
+        public Guid CurrencyIdFilter { get; set; }
+        public List<SelectListItem> CurrencyLookupList { get; set; } = new List<SelectListItem>
+        {
+            new SelectListItem(string.Empty, "")
+        };
 
         protected IProductsAppService _productsAppService;
 
@@ -32,6 +38,12 @@ namespace ProductManagementSystem.Web.Pages.Products
 
         public virtual async Task OnGetAsync()
         {
+            CurrencyLookupList.AddRange((
+                    await _productsAppService.GetCurrencyLookupAsync(new LookupRequestDto
+                    {
+                        MaxResultCount = LimitedResultRequestDto.MaxMaxResultCount
+                    })).Items.Select(t => new SelectListItem(t.DisplayName, t.Id.ToString())).ToList()
+            );
 
             await Task.CompletedTask;
         }

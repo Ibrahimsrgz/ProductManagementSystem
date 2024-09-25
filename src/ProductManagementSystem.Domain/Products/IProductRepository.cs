@@ -8,8 +8,12 @@ namespace ProductManagementSystem.Products
 {
     public partial interface IProductRepository : IRepository<Product, long>
     {
+        Task<ProductWithNavigationProperties> GetWithNavigationPropertiesAsync(
+    long id,
+    CancellationToken cancellationToken = default
+);
 
-        Task DeleteAllAsync(
+        Task<List<ProductWithNavigationProperties>> GetListWithNavigationPropertiesAsync(
             string? filterText = null,
             string? name = null,
             string? code = null,
@@ -17,7 +21,13 @@ namespace ProductManagementSystem.Products
             decimal? priceMax = null,
             int? quantityMin = null,
             int? quantityMax = null,
-            CancellationToken cancellationToken = default);
+            Guid? currencyId = null,
+            string? sorting = null,
+            int maxResultCount = int.MaxValue,
+            int skipCount = 0,
+            CancellationToken cancellationToken = default
+        );
+
         Task<List<Product>> GetListAsync(
                     string? filterText = null,
                     string? name = null,
@@ -40,6 +50,7 @@ namespace ProductManagementSystem.Products
             decimal? priceMax = null,
             int? quantityMin = null,
             int? quantityMax = null,
+            Guid? currencyId = null,
             CancellationToken cancellationToken = default);
     }
 }

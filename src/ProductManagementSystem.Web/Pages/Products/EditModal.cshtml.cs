@@ -19,6 +19,10 @@ namespace ProductManagementSystem.Web.Pages.Products
         [BindProperty]
         public ProductUpdateViewModel Product { get; set; }
 
+        public List<SelectListItem> CurrencyLookupListRequired { get; set; } = new List<SelectListItem>
+        {
+        };
+
         protected IProductsAppService _productsAppService;
 
         public EditModalModelBase(IProductsAppService productsAppService)
@@ -30,8 +34,15 @@ namespace ProductManagementSystem.Web.Pages.Products
 
         public virtual async Task OnGetAsync()
         {
-            var product = await _productsAppService.GetAsync(Id);
-            Product = ObjectMapper.Map<ProductDto, ProductUpdateViewModel>(product);
+            var productWithNavigationPropertiesDto = await _productsAppService.GetWithNavigationPropertiesAsync(Id);
+            Product = ObjectMapper.Map<ProductDto, ProductUpdateViewModel>(productWithNavigationPropertiesDto.Product);
+
+            CurrencyLookupListRequired.AddRange((
+                                    await _productsAppService.GetCurrencyLookupAsync(new LookupRequestDto
+                                    {
+                                        MaxResultCount = LimitedResultRequestDto.MaxMaxResultCount
+                                    })).Items.Select(t => new SelectListItem(t.DisplayName, t.Id.ToString())).ToList()
+                        );
 
         }
 

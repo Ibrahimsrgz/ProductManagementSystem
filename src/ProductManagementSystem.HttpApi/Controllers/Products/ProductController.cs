@@ -1,3 +1,4 @@
+using ProductManagementSystem.Shared;
 using Asp.Versioning;
 using System;
 using System.Collections.Generic;
@@ -27,9 +28,16 @@ namespace ProductManagementSystem.Controllers.Products
         }
 
         [HttpGet]
-        public virtual Task<PagedResultDto<ProductDto>> GetListAsync(GetProductsInput input)
+        public virtual Task<PagedResultDto<ProductWithNavigationPropertiesDto>> GetListAsync(GetProductsInput input)
         {
             return _productsAppService.GetListAsync(input);
+        }
+
+        [HttpGet]
+        [Route("with-navigation-properties/{id}")]
+        public virtual Task<ProductWithNavigationPropertiesDto> GetWithNavigationPropertiesAsync(long id)
+        {
+            return _productsAppService.GetWithNavigationPropertiesAsync(id);
         }
 
         [HttpGet]
@@ -37,6 +45,13 @@ namespace ProductManagementSystem.Controllers.Products
         public virtual Task<ProductDto> GetAsync(long id)
         {
             return _productsAppService.GetAsync(id);
+        }
+
+        [HttpGet]
+        [Route("currency-lookup")]
+        public virtual Task<PagedResultDto<LookupDto<Guid>>> GetCurrencyLookupAsync(LookupRequestDto input)
+        {
+            return _productsAppService.GetCurrencyLookupAsync(input);
         }
 
         [HttpPost]
@@ -73,18 +88,5 @@ namespace ProductManagementSystem.Controllers.Products
             return _productsAppService.GetDownloadTokenAsync();
         }
 
-        [HttpDelete]
-        [Route("")]
-        public virtual Task DeleteByIdsAsync(List<long> productIds)
-        {
-            return _productsAppService.DeleteByIdsAsync(productIds);
-        }
-
-        [HttpDelete]
-        [Route("all")]
-        public virtual Task DeleteAllAsync(GetProductsInput input)
-        {
-            return _productsAppService.DeleteAllAsync(input);
-        }
     }
 }

@@ -1,3 +1,4 @@
+using ProductManagementSystem.Currencies;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -22,13 +23,14 @@ namespace ProductManagementSystem.Products
         public virtual decimal Price { get; set; }
 
         public virtual int Quantity { get; set; }
+        public Guid CurrencyId { get; set; }
 
         protected ProductBase()
         {
 
         }
 
-        public ProductBase(string name, string code, decimal price, int quantity)
+        public ProductBase(Guid currencyId, string name, string code, decimal price, int quantity)
         {
 
             Check.NotNull(name, nameof(name));
@@ -39,6 +41,7 @@ namespace ProductManagementSystem.Products
             Code = code;
             Price = price;
             Quantity = quantity;
+            CurrencyId = currencyId;
         }
 
     }

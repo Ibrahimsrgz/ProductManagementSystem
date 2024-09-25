@@ -104,15 +104,6 @@ public class ProductManagementSystemDbContext :
         }
         if (builder.IsHostDatabase())
         {
-            builder.Entity<Product>(b =>
-            {
-                b.ToTable(ProductManagementSystemConsts.DbTablePrefix + "Product", ProductManagementSystemConsts.DbSchema);
-                b.ConfigureByConvention();
-                b.Property(x => x.Name).HasColumnName(nameof(Product.Name)).IsRequired().HasMaxLength(ProductConsts.NameMaxLength);
-                b.Property(x => x.Code).HasColumnName(nameof(Product.Code)).IsRequired().HasMaxLength(ProductConsts.CodeMaxLength);
-                b.Property(x => x.Price).HasColumnName(nameof(Product.Price));
-                b.Property(x => x.Quantity).HasColumnName(nameof(Product.Quantity));
-            });
 
         }
         if (builder.IsHostDatabase())
@@ -128,6 +119,20 @@ public class ProductManagementSystemDbContext :
                 b.Property(x => x.Country).HasColumnName(nameof(Currency.Country)).HasMaxLength(CurrencyConsts.CountryMaxLength);
                 b.Property(x => x.Active).HasColumnName(nameof(Currency.Active));
                 b.Property(x => x.Order).HasColumnName(nameof(Currency.Order));
+            });
+
+        }
+        if (builder.IsHostDatabase())
+        {
+            builder.Entity<Product>(b =>
+            {
+                b.ToTable(ProductManagementSystemConsts.DbTablePrefix + "Product", ProductManagementSystemConsts.DbSchema);
+                b.ConfigureByConvention();
+                b.Property(x => x.Name).HasColumnName(nameof(Product.Name)).IsRequired().HasMaxLength(ProductConsts.NameMaxLength);
+                b.Property(x => x.Code).HasColumnName(nameof(Product.Code)).IsRequired().HasMaxLength(ProductConsts.CodeMaxLength);
+                b.Property(x => x.Price).HasColumnName(nameof(Product.Price));
+                b.Property(x => x.Quantity).HasColumnName(nameof(Product.Quantity));
+                b.HasOne<Currency>().WithMany().IsRequired().HasForeignKey(x => x.CurrencyId).OnDelete(DeleteBehavior.NoAction);
             });
 
         }

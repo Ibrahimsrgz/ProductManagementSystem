@@ -15,7 +15,7 @@
   "PreserveCustomCode": true,
   "IsMultiTenant": false,
   "CheckConcurrency": true,
-  "BulkDeleteEnabled": true,
+  "BulkDeleteEnabled": false,
   "ShouldCreateUserInterface": true,
   "ShouldCreateBackend": true,
   "ShouldExportExcel": true,
@@ -136,7 +136,26 @@
       "OrdinalIndex": 0
     }
   ],
-  "NavigationProperties": [],
+  "NavigationProperties": [
+    {
+      "EntityNameWithDuplicationNumber": "Currency",
+      "EntitySetNameWithDuplicationNumber": "Currencies",
+      "ReferencePropertyName": "Currency",
+      "UiPickType": "Dropdown",
+      "IsRequired": true,
+      "IncludeEntitiesFromModules": false,
+      "FromAbpModule": false,
+      "Name": "CurrencyId",
+      "DisplayProperty": "Name",
+      "Namespace": "ProductManagementSystem.Currencies",
+      "EntityName": "Currency",
+      "EntitySetName": "Currencies",
+      "DtoNamespace": "ProductManagementSystem.Currencies",
+      "DtoEntityName": "CurrencyDto",
+      "Type": "Guid",
+      "IsFilterable": true
+    }
+  ],
   "NavigationConnections": [],
   "ChildEntities": [],
   "PhysicalFileName": "Product.json"

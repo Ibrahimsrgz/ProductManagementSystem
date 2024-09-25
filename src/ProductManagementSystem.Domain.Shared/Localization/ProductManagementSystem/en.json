@@ -85,6 +85,7 @@
     "MinOrder": "Min Order",
     "MaxNumeric": "Max Numeric",
     "MaxOrder": "Max Order",
-    "Menu:Currencies": "Currencies"
+    "Menu:Currencies": "Currencies",
+    "Currency": "Currency"
   }
 }
