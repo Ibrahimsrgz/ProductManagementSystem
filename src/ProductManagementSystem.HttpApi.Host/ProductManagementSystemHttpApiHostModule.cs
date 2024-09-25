@@ -136,6 +136,8 @@ public class ProductManagementSystemHttpApiHostModule : AbpModule
                 options.Authority = configuration["AuthServer:Authority"];
                 options.RequireHttpsMetadata = configuration.GetValue<bool>("AuthServer:RequireHttpsMetadata");
                 options.Audience = "ProductManagementSystem";
+                options.TokenValidationParameters.ValidIssuers = configuration.GetSection("AuthServer:ValidIssuers").Get<string[]>();
+
             });
 
         context.Services.Configure<AbpClaimsPrincipalFactoryOptions>(options =>
