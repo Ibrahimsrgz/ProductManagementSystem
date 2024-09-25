@@ -1,0 +1,33 @@
+﻿{
+  "applications": {
+    "Docker-Dependencies": {
+      "type": "cli",
+      "startCommand": "./up.ps1",
+      "stopCommand": "./down.ps1",
+      "workingDirectory": "../../docker",
+      "folder": "infrastructure"
+    },
+    "ProductManagementSystem.Maui": {
+      "type": "dotnet-project",
+      "path": "../../../src/ProductManagementSystem.Maui/ProductManagementSystem.Maui.csproj"
+    },
+    "ProductManagementSystem.AuthServer": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44356",
+      "path": "../../../src/ProductManagementSystem.AuthServer/ProductManagementSystem.AuthServer.csproj",
+      "kubernetesService": ".*-authserver$"
+    },
+    "ProductManagementSystem.HttpApi.Host": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44392",
+      "path": "../../../src/ProductManagementSystem.HttpApi.Host/ProductManagementSystem.HttpApi.Host.csproj",
+      "kubernetesService": ".*-httpapihost$"  
+    },
+    "ProductManagementSystem.Web": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44355",
+      "path": "../../../src/ProductManagementSystem.Web/ProductManagementSystem.Web.csproj",
+      "kubernetesService": ".*-web$"
+    }
+  }
+}

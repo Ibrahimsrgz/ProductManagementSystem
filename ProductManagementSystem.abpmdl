@@ -1,0 +1,117 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.TextTemplateManagement": {
+      "version": "8.3.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.LanguageManagement": {
+      "version": "8.3.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.LeptonXTheme": {
+      "version": "3.3.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.OpenIddict.Pro": {
+      "version": "8.3.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.Gdpr": {
+      "version": "8.3.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.AuditLogging.Pro": {
+      "version": "8.3.0",
+      "isInstalled": true
+    },
+    "Volo.Saas": {
+      "version": "8.3.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.Identity.Pro": {
+      "version": "8.3.0",
+      "isInstalled": true
+    },
+    "Volo.Abp.Account.Pro": {
+      "version": "8.3.0",
+      "isInstalled": true
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "ProductManagementSystem.Application": {
+      "path": "src/ProductManagementSystem.Application/ProductManagementSystem.Application.abppkg",
+      "folder": "src"
+    },
+    "ProductManagementSystem.Application.Tests": {
+      "path": "test/ProductManagementSystem.Application.Tests/ProductManagementSystem.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "ProductManagementSystem.Domain.Shared": {
+      "path": "src/ProductManagementSystem.Domain.Shared/ProductManagementSystem.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "ProductManagementSystem.Application.Contracts": {
+      "path": "src/ProductManagementSystem.Application.Contracts/ProductManagementSystem.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "ProductManagementSystem.HttpApi": {
+      "path": "src/ProductManagementSystem.HttpApi/ProductManagementSystem.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "ProductManagementSystem.HttpApi.Client": {
+      "path": "src/ProductManagementSystem.HttpApi.Client/ProductManagementSystem.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "ProductManagementSystem.Web": {
+      "path": "src/ProductManagementSystem.Web/ProductManagementSystem.Web.abppkg",
+      "folder": "src"
+    },
+    "ProductManagementSystem.AuthServer": {
+      "path": "src/ProductManagementSystem.AuthServer/ProductManagementSystem.AuthServer.abppkg",
+      "folder": "src"
+    },
+    "ProductManagementSystem.HttpApi.Host": {
+    "path": "src/ProductManagementSystem.HttpApi.Host/ProductManagementSystem.HttpApi.Host.abppkg",
+    "folder": "src"
+    },
+    "ProductManagementSystem.EntityFrameworkCore.Tests": {
+      "path": "test/ProductManagementSystem.EntityFrameworkCore.Tests/ProductManagementSystem.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "ProductManagementSystem.EntityFrameworkCore": {
+      "path": "src/ProductManagementSystem.EntityFrameworkCore/ProductManagementSystem.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "ProductManagementSystem.TestBase": {
+      "path": "test/ProductManagementSystem.TestBase/ProductManagementSystem.TestBase.abppkg",
+      "folder": "test"
+    },
+    "ProductManagementSystem.Domain.Tests": {
+      "path": "test/ProductManagementSystem.Domain.Tests/ProductManagementSystem.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "ProductManagementSystem.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/ProductManagementSystem.HttpApi.Client.ConsoleTestApp/ProductManagementSystem.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "ProductManagementSystem.DbMigrator": {
+      "path": "src/ProductManagementSystem.DbMigrator/ProductManagementSystem.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "ProductManagementSystem.Maui": {
+      "path": "src/ProductManagementSystem.Maui/ProductManagementSystem.Maui.abppkg",
+      "folder": "src"
+    },
+    "ProductManagementSystem.Domain": {
+      "path": "src/ProductManagementSystem.Domain/ProductManagementSystem.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}
