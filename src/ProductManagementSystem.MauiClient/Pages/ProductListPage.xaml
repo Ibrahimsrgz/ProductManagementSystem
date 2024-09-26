@@ -2,9 +2,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProductManagementSystem.MauiClient.Pages.ProductListPage"
              Title="Second Page">
-    <VerticalStackLayout>
-        <Label Text="This is the second page!" 
-               VerticalOptions="Center" 
-               HorizontalOptions="Center" />
+
+    <VerticalStackLayout Padding="10">
+        <!-- Yükleme süreci için ActivityIndicator -->
+        <ActivityIndicator IsRunning="{Binding IsLoading}" 
+                           IsVisible="{Binding IsLoading}" 
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+
+        <!-- Hata mesajını göstermek için -->
+        <Label Text="{Binding ErrorMessage}" 
+               TextColor="Red"
+               IsVisible="{Binding IsError}" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center"/>
+
+        <!-- Gelen verileri listelemek için CollectionView -->
+        <CollectionView ItemsSource="{Binding Items}"
+                        IsVisible="{Binding IsNotLoadingAndNotError}"
+                        VerticalOptions="FillAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Label Text="{Binding Name}" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Start"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>
