@@ -133,30 +133,60 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
         }
 
         //MAUI Client
+        //var mauiClientId = configurationSection["ProductManagementSystem_Maui:ClientId"];
+        //if (!mauiClientId.IsNullOrWhiteSpace())
+        //{
+        //    var mauiClientRootUrl = configurationSection["ProductManagementSystem_Maui:RootUrl"]?.Replace("_", "-");
+        //    var mauiClientPostLogoutRedirectUri = configurationSection["ProductManagementSystem_Maui:PostLogoutRedirectUri"]?.Replace("_", "-");
+        //    await CreateApplicationAsync(
+        //        name: mauiClientId!,
+        //        type: OpenIddictConstants.ClientTypes.Public,
+        //        consentType: OpenIddictConstants.ConsentTypes.Implicit,
+        //        displayName: "MAUI Application",
+        //        secret: null,
+        //        grantTypes: new List<string> {
+        //            OpenIddictConstants.GrantTypes.AuthorizationCode,
+        //            OpenIddictConstants.GrantTypes.Password,
+        //            OpenIddictConstants.GrantTypes.ClientCredentials,
+        //            OpenIddictConstants.GrantTypes.RefreshToken
+        //        },
+        //        scopes: commonScopes,
+        //        redirectUri: mauiClientRootUrl,
+        //        postLogoutRedirectUri: mauiClientPostLogoutRedirectUri
+        //    );
+        //}
+
+        var mauiScopes = new List<string>
+    {
+        "offline_access",
+        OpenIddictConstants.Permissions.Scopes.Address,
+        OpenIddictConstants.Permissions.Scopes.Email,
+        OpenIddictConstants.Permissions.Scopes.Phone,
+        OpenIddictConstants.Permissions.Scopes.Profile,
+        OpenIddictConstants.Permissions.Scopes.Roles,
+        "ProductManagementSystem"
+    };
+
         var mauiClientId = configurationSection["ProductManagementSystem_Maui:ClientId"];
         if (!mauiClientId.IsNullOrWhiteSpace())
         {
-            var mauiClientRootUrl = configurationSection["ProductManagementSystem_Maui:RootUrl"]?.Replace("_", "-");
-            var mauiClientPostLogoutRedirectUri = configurationSection["ProductManagementSystem_Maui:PostLogoutRedirectUri"]?.Replace("_", "-");
+            var mauiRootUrl = configurationSection["ProductManagementSystem_Maui:RootUrl"];
             await CreateApplicationAsync(
-                name: mauiClientId!,
-                type: OpenIddictConstants.ClientTypes.Public,
+                name: mauiClientId,
+                type: OpenIddictConstants.ClientTypes.Confidential,
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
-                displayName: "MAUI Application",
-                secret: null,
-                grantTypes: new List<string> {
-                    OpenIddictConstants.GrantTypes.AuthorizationCode,
-                    OpenIddictConstants.GrantTypes.Password,
-                    OpenIddictConstants.GrantTypes.ClientCredentials,
-                    OpenIddictConstants.GrantTypes.RefreshToken
+                scopes: mauiScopes,
+                grantTypes: new List<string>
+                {
+                OpenIddictConstants.GrantTypes.AuthorizationCode,
+                OpenIddictConstants.GrantTypes.RefreshToken
                 },
-                scopes: commonScopes,
-                redirectUri: mauiClientRootUrl,
-                postLogoutRedirectUri: mauiClientPostLogoutRedirectUri
+                secret: configurationSection["ProductManagementSystem_Maui:ClientSecret"],
+                redirectUri: $"{mauiRootUrl}",
+                postLogoutRedirectUri: $"{mauiRootUrl}",
+                displayName: "MauiProductManagementSystem"
             );
         }
-        
-        
 
 
 
