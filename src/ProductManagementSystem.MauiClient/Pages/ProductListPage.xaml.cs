@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using ProductManagementSystem.MauiClient.Dtos.Product;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,9 +13,10 @@ namespace ProductManagementSystem.MauiClient.Pages
 {
     public partial class ProductListPage : ContentPage, INotifyPropertyChanged
     {
+        private readonly HttpClient _httpClient = new HttpClient();
 
         // ObservableCollection ile verileri UI'ye bağlıyoruz
-        public ObservableCollection<Item> Items { get; set; } = new ObservableCollection<Item>();
+        public ObservableCollection<ProductItemDto> Items { get; set; } = new ObservableCollection<ProductItemDto>();
 
         private bool _isLoading;
         public bool IsLoading
@@ -42,47 +45,50 @@ namespace ProductManagementSystem.MauiClient.Pages
         {
             InitializeComponent();
             BindingContext = this;
-            LoadMockData(); // Mock datayı yükle
+            //LoadMockData(); // Mock datayı yükle
+            LoadData();
+
+
         }
 
-        private async void LoadMockData()
-        {
-            IsLoading = true;
-            IsError = false;
+        //private async void LoadMockData()
+        //{
+        //    IsLoading = true;
+        //    IsError = false;
 
-            try
-            {
-                // MOCK DATA kullanımı - Gerçek HTTP isteği yerine elle yazılmış veri
-                await Task.Delay(1000); // Simülasyon için gecikme
+        //    try
+        //    {
+        //        // MOCK DATA kullanımı - Gerçek HTTP isteği yerine elle yazılmış veri
+        //        await Task.Delay(1000); // Simülasyon için gecikme
 
-                var mockItems = new List<Item>
-                {
-                    new Item { Name = "Mock Item 1" },
-                    new Item { Name = "Mock Item 2" },
-                    new Item { Name = "Mock Item 3" },
-                    new Item { Name = "Mock Item 4" }
-                };
+        //        var mockItems = new List<Item>
+        //        {
+        //            new Item { Name = "Mock Item 1" },
+        //            new Item { Name = "Mock Item 2" },
+        //            new Item { Name = "Mock Item 3" },
+        //            new Item { Name = "Mock Item 4" }
+        //        };
 
-                foreach (var item in mockItems)
-                {
-                    Items.Add(item);
-                }
+        //        foreach (var item in mockItems)
+        //        {
+        //            Items.Add(item);
+        //        }
 
-                ErrorMessage = string.Empty; // Hata yoksa mesajı sıfırla
-            }
-            catch (Exception ex)
-            {
-                // Hata yönetimi
-                IsError = true;
-                ErrorMessage = $"Error loading mock data: {ex.Message}";
-            }
-            finally
-            {
-                IsLoading = false;
-            }
-        }
+        //        ErrorMessage = string.Empty; // Hata yoksa mesajı sıfırla
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Hata yönetimi
+        //        IsError = true;
+        //        ErrorMessage = $"Error loading mock data: {ex.Message}";
+        //    }
+        //    finally
+        //    {
+        //        IsLoading = false;
+        //    }
+        //}
 
-        /*
+
         // Eğer gerçek veri ile çalışacaksanız bu bölümü kullanabilirsiniz:
         private async void LoadData()
         {
@@ -91,14 +97,14 @@ namespace ProductManagementSystem.MauiClient.Pages
 
             try
             {
-                string url = "https://api.example.com/items";
+                string url = "https://1707-212-108-134-135.ngrok-free.app/api/app/products";
                 var response = await _httpClient.GetStringAsync(url);
 
-                var items = JsonConvert.DeserializeObject<List<Item>>(response);
+                var items = JsonConvert.DeserializeObject<GetProductItemsResponseDto>(response);
 
                 if (items != null)
                 {
-                    foreach (var item in items)
+                    foreach (var item in items.Items)
                     {
                         Items.Add(item);
                     }
@@ -124,7 +130,7 @@ namespace ProductManagementSystem.MauiClient.Pages
                 IsLoading = false;
             }
         }
-        */
+
 
         // INotifyPropertyChanged implementasyonu
         public event PropertyChangedEventHandler PropertyChanged;
