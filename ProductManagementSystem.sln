@@ -41,6 +41,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductManagementSystem.DbM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductManagementSystem.Maui", "src\ProductManagementSystem.Maui\ProductManagementSystem.Maui.csproj", "{801DE4BD-85F6-4ABB-93F9-3BF61727AB9C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductManagementSystem.MauiClient", "src\ProductManagementSystem.MauiClient\ProductManagementSystem.MauiClient.csproj", "{A91D7804-012D-4A3C-8B5E-A564E4BFC98B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,12 @@ Global
 		{801DE4BD-85F6-4ABB-93F9-3BF61727AB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{801DE4BD-85F6-4ABB-93F9-3BF61727AB9C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{801DE4BD-85F6-4ABB-93F9-3BF61727AB9C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A91D7804-012D-4A3C-8B5E-A564E4BFC98B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A91D7804-012D-4A3C-8B5E-A564E4BFC98B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A91D7804-012D-4A3C-8B5E-A564E4BFC98B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A91D7804-012D-4A3C-8B5E-A564E4BFC98B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A91D7804-012D-4A3C-8B5E-A564E4BFC98B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A91D7804-012D-4A3C-8B5E-A564E4BFC98B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
