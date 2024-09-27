@@ -272,3 +272,6 @@ src/ProductManagementSystem.Blazor.Server.Tiered/Logs/*
 # IdentityServer temp files
 tempkey.rsa
 tempkey.jwk
+/src/ProductManagementSystem.AuthServer/appsettings.secrets.json
+/src/ProductManagementSystem.HttpApi.Host/appsettings.secrets.json
+/src/ProductManagementSystem.DbMigrator/appsettings.secrets.json
