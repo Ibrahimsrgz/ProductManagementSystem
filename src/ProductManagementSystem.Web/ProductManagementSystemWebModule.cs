@@ -184,6 +184,8 @@ public class ProductManagementSystemWebModule : AbpModule
     {
         Configure<RazorPagesOptions>(options =>
         {
+            options.Conventions.AuthorizePage("/index", "");
+
             options.Conventions.AuthorizePage("/HostDashboard", ProductManagementSystemPermissions.Dashboard.Host);
             options.Conventions.AuthorizePage("/TenantDashboard", ProductManagementSystemPermissions.Dashboard.Tenant);
             options.Conventions.AuthorizePage("/Products/Index", ProductManagementSystemPermissions.Products.Default);
