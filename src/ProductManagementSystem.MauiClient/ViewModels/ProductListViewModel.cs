@@ -20,14 +20,20 @@ namespace ProductManagementSystem.MauiClient.ViewModels
         public bool IsLoading
         {
             get => _isLoading;
-            set { _isLoading = value; OnPropertyChanged(); }
+            set { _isLoading = value; 
+                OnPropertyChanged(nameof(IsLoading));
+                OnPropertyChanged(nameof(IsNotLoadingAndNotError));
+            }
         }
 
         private bool _isError;
         public bool IsError
         {
             get => _isError;
-            set { _isError = value; OnPropertyChanged(); }
+            set { _isError = value; 
+                OnPropertyChanged(nameof(IsLoading));
+                OnPropertyChanged(nameof(IsNotLoadingAndNotError));
+            }
         }
 
         public bool IsNotLoadingAndNotError => !IsLoading && !IsError;
@@ -39,10 +45,7 @@ namespace ProductManagementSystem.MauiClient.ViewModels
             set { _errorMessage = value; OnPropertyChanged(); }
         }
 
-        public ProductListViewModel()
-        {
-        }
-
+      
         public ProductListViewModel(AppDbContext dbContext)
         {
             _dbContext = dbContext;

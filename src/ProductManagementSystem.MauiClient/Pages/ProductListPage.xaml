@@ -1,7 +1,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProductManagementSystem.MauiClient.Pages.ProductListPage"
-             Title="Second Page">
+             Title="Ürünler">
     <ScrollView>
         <VerticalStackLayout Padding="10">
             <ActivityIndicator IsRunning="{Binding IsLoading}" 
@@ -13,6 +13,14 @@
                IsVisible="{Binding IsError}" 
                HorizontalOptions="Center" 
                VerticalOptions="Center"/>
+
+            <Label Text="İncelemek istediğiniz ürüne tıklayınız."
+                   IsVisible="{Binding IsNotLoadingAndNotError}"
+                   FontSize="18"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   Margin="0,10,0,10"/>
+            
             <CollectionView ItemsSource="{Binding Items}"
                         IsVisible="{Binding IsNotLoadingAndNotError}"
                         VerticalOptions="FillAndExpand">

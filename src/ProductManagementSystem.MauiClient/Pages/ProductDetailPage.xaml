@@ -3,14 +3,14 @@
              x:Class="ProductManagementSystem.MauiClient.Pages.ProductDetailPage">
 
 <VerticalStackLayout Padding="20">
-    <Label Text="Ürün Detayları" 
+    <Label Text="Ürünün Detayları" 
            FontSize="28" 
            HorizontalOptions="Center" 
            FontAttributes="Bold"
            TextColor="DarkBlue" />
            
      <HorizontalStackLayout Spacing="10" Margin="0,10,0,0">
-        <Label Text="Adı:" FontSize="18" FontAttributes="Bold" TextColor="Gray" />
+        <Label Text="Ürün Adı:" FontSize="18" FontAttributes="Bold" TextColor="Gray" />
         <Label Text="{Binding Name}" FontSize="18" />
     </HorizontalStackLayout>
 

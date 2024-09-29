@@ -13,7 +13,7 @@ public partial class MainPage : ContentPage
         _serviceProvider = serviceProvider;  // Store the service provider for later use
     }
 
-    private async void OnGoToSecondPageClicked(object sender, EventArgs e)
+    private async void OnGetProductListPageClicked(object sender, EventArgs e)
     {
         // Resolve ProductListPage from the service provider
         var productListPage = _serviceProvider.GetRequiredService<ProductListPage>();

@@ -30,6 +30,8 @@ namespace ProductManagementSystem.MauiClient.Pages
             var label = sender as Label;
             var selectedProduct = label?.BindingContext as ProductItem;
 
+            _viewModel.Items.Clear(); 
+
             if (selectedProduct != null)
             {
                 await Navigation.PushAsync(new ProductDetailPage(selectedProduct));

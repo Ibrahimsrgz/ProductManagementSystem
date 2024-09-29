@@ -4,8 +4,8 @@
              x:Class="ProductManagementSystem.MauiClient.MainPage">
 
     <VerticalStackLayout>
-        <Button Text="Go to Second Page" 
-                Clicked="OnGoToSecondPageClicked" />
+        <Button Text="Listeyi Al" 
+                Clicked="OnGetProductListPageClicked" />
     </VerticalStackLayout>
     
 
