@@ -26,7 +26,7 @@ namespace ProductManagementSystem.MauiClient.ViewModels
             set
             {
                 _isError = value;
-                OnPropertyChanged(nameof(IsLoading));
+                OnPropertyChanged(nameof(IsError));
                 OnPropertyChanged(nameof(IsNotLoadingAndNotError));
             }
         }
@@ -36,7 +36,7 @@ namespace ProductManagementSystem.MauiClient.ViewModels
         public string ErrorMessage
         {
             get => _errorMessage;
-            set { _errorMessage = value; OnPropertyChanged(); }
+            set { _errorMessage = value; OnPropertyChanged(nameof(ErrorMessage)); OnPropertyChanged(nameof(IsError)); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

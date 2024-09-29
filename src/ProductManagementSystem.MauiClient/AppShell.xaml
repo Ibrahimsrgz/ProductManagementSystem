@@ -12,8 +12,5 @@
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
-
-
     <ShellContent Title="Second Page" ContentTemplate="{DataTemplate pages:ProductListPage}" />
-
 </Shell>

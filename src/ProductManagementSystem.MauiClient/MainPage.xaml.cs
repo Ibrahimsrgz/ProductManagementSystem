@@ -12,7 +12,6 @@ public partial class MainPage : ContentPage
         InitializeComponent();
         _serviceProvider = serviceProvider;  // Store the service provider for later use
     }
-
     private async void OnGetProductListPageClicked(object sender, EventArgs e)
     {
         // Resolve ProductListPage from the service provider

@@ -1,5 +1,4 @@
 ﻿using ProductManagementSystem.MauiClient.Database;
-
 namespace ProductManagementSystem.MauiClient;
 
 public partial class App : Application
@@ -10,6 +9,5 @@ public partial class App : Application
 
 		//MainPage = new AppShell();
         MainPage = new NavigationPage(mainPage); // Ensure MainPage is resolved through DI
-
     }
 }
