@@ -57,6 +57,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="appsettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Diagnostics" Version="8.3.2" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
 		<PackageReference Include="IdentityModel" Version="7.0.0" />
@@ -82,12 +92,6 @@
 	  <MauiXaml Update="Pages\ProductListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Update="appsettings.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
 	</ItemGroup>
 
 </Project>
