@@ -42,7 +42,6 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<HttpClient>();
         builder.Services.AddTransient<IProductService, ProductService>();
-        //builder.Services.AddTransient<ProductListViewModel>();
         builder.Services.AddTransient<IProductListViewModel, ProductListViewModel>();
 
         // Register MainPage for DI and pass IServiceProvider
