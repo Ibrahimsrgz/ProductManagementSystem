@@ -1,5 +1,4 @@
-﻿using ProductManagementSystem.MauiClient.Dtos.Product;
-using ProductManagementSystem.MauiClient.ViewModels;
+﻿using ProductManagementSystem.MauiClient.Models;
 
 namespace ProductManagementSystem.MauiClient.Pages
 {
