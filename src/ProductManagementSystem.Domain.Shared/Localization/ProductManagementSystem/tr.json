@@ -43,6 +43,24 @@
     "Price": "Fiyat",
     "Quantity": "Miktar",
     "Products": "Ürünler",
-    "Product" : "Ürün"
+    "Product": "Ürün",
+    "Menu:Currencies": "Para Birimleri",
+    "NewCurrency": "Yeni Para Birimi",
+    "Numeric": "Numara",
+    "Currency": "Para Birimi",
+    "Symbol": "Sembol",
+    "Country": "Ülke",
+    "Active": "Aktif",
+    "Order": "Sıra",
+    "Permission:Products": "Ürünler",
+    "Permission:ProductManagementSystem": "Ürün Yönetim Sistemi",
+    "Permission:Create": "Oluştur",
+    "Permission:Edit": "Düzenle",
+    "Permission:Delete": "Sil",
+    "NewProduct": "Yeni Ürün",
+    "Actions": "İşlemler",
+    "SuccessfullyDeleted": "Başarıyla silindi",
+    "Menu:Products": "Ürünler",
+    "SeeAdvancedFilters": "Gelişmiş Filtreler"
   }
 }
