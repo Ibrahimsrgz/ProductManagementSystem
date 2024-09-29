@@ -4,19 +4,23 @@ namespace ProductManagementSystem.MauiClient;
 
 public partial class MainPage : ContentPage
 {
-	
+    private readonly IServiceProvider _serviceProvider;
 
-	public MainPage()
-	{
-		InitializeComponent();
-	}
+    // Modify the constructor to accept IServiceProvider
+    public MainPage(IServiceProvider serviceProvider)
+    {
+        InitializeComponent();
+        _serviceProvider = serviceProvider;  // Store the service provider for later use
+    }
+
     private async void OnGoToSecondPageClicked(object sender, EventArgs e)
     {
-        // Sayfaya yönlendirme
-        await Navigation.PushAsync(new ProductListPage());
+        // Resolve ProductListPage from the service provider
+        var productListPage = _serviceProvider.GetRequiredService<ProductListPage>();
+
+        // Navigate to ProductListPage
+        await Navigation.PushAsync(productListPage);
     }
-  
-
-
 }
+
 

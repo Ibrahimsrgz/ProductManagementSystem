@@ -1,4 +1,5 @@
 ﻿using ProductManagementSystem.MauiClient.Database;
+using ProductManagementSystem.MauiClient.Models;
 using ProductManagementSystem.MauiClient.ViewModels;
 using System.ComponentModel;
 
