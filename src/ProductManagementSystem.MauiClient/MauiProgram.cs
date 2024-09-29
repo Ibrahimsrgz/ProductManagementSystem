@@ -3,6 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using ProductManagementSystem.MauiClient.Database;
 using ProductManagementSystem.MauiClient.Pages;
+using ProductManagementSystem.MauiClient.Services;
+using ProductManagementSystem.MauiClient.ViewModels;
 using System.Reflection;
 
 namespace ProductManagementSystem.MauiClient;
@@ -36,7 +38,12 @@ public static class MauiProgram
         builder.Services.AddTransient<ProductListPage>();
 
         // Detail page her defasında yeni bir instance oluşturur
-        builder.Services.AddTransient<ProductDetailPage>();  
+        builder.Services.AddTransient<ProductDetailPage>();
+
+        builder.Services.AddSingleton<HttpClient>();
+        builder.Services.AddTransient<IProductService, ProductService>();
+        //builder.Services.AddTransient<ProductListViewModel>();
+        builder.Services.AddTransient<IProductListViewModel, ProductListViewModel>();
 
         // Register MainPage for DI and pass IServiceProvider
         builder.Services.AddSingleton<MainPage>();

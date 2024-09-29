@@ -7,13 +7,13 @@ namespace ProductManagementSystem.MauiClient.Pages
 {
     public partial class ProductListPage : ContentPage, INotifyPropertyChanged
     {
-        private readonly ProductListViewModel _viewModel;
+        private readonly IProductListViewModel _viewModel;
 
-        public ProductListPage(AppDbContext dbContext)
+        public ProductListPage(AppDbContext dbContext, IProductListViewModel viewModel)
         {
             InitializeComponent();
 
-            _viewModel = new ProductListViewModel(dbContext);
+            _viewModel = viewModel;
             BindingContext = _viewModel;
         }
 

@@ -3,52 +3,30 @@ using Newtonsoft.Json;
 using ProductManagementSystem.MauiClient.Database;
 using ProductManagementSystem.MauiClient.Dtos.Product;
 using ProductManagementSystem.MauiClient.Models;
+using ProductManagementSystem.MauiClient.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace ProductManagementSystem.MauiClient.ViewModels
 {
-    public class ProductListViewModel : INotifyPropertyChanged
+    public interface IProductListViewModel
+    {
+        ObservableCollection<ProductItem> Items { get; set; }
+        Task InitializeAsync();
+    }
+
+    public class ProductListViewModel : BaseViewModel, IProductListViewModel
     {
         private readonly AppDbContext _dbContext;
-        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly IProductService _productService;
 
         public ObservableCollection<ProductItem> Items { get; set; } = new ObservableCollection<ProductItem>();
 
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set { _isLoading = value; 
-                OnPropertyChanged(nameof(IsLoading));
-                OnPropertyChanged(nameof(IsNotLoadingAndNotError));
-            }
-        }
-
-        private bool _isError;
-        public bool IsError
-        {
-            get => _isError;
-            set { _isError = value; 
-                OnPropertyChanged(nameof(IsLoading));
-                OnPropertyChanged(nameof(IsNotLoadingAndNotError));
-            }
-        }
-
-        public bool IsNotLoadingAndNotError => !IsLoading && !IsError;
-
-        private string _errorMessage;
-        public string ErrorMessage
-        {
-            get => _errorMessage;
-            set { _errorMessage = value; OnPropertyChanged(); }
-        }
-
-      
-        public ProductListViewModel(AppDbContext dbContext)
+        public ProductListViewModel(AppDbContext dbContext, IProductService productService)
         {
             _dbContext = dbContext;
+            _productService = productService;
         }
 
         public async Task InitializeAsync()
@@ -63,18 +41,11 @@ namespace ProductManagementSystem.MauiClient.ViewModels
 
             try
             {
-                var configuration = Helpers.ConfigurationHelper.LoadConfiguration();
-                string apiUrl = configuration.GetSection("Urls:ApiUrl").Value;
+                var items = await _productService.GetProductsAsync();
 
-                string url = apiUrl + "/api/app/products";
-                
-                var response = await _httpClient.GetStringAsync(url);
-                
-                var items = JsonConvert.DeserializeObject<GetProductItemsResponseDto>(response);
-
+                // Clear existing products in the database
                 _dbContext.Products.RemoveRange(_dbContext.Products);
                 await _dbContext.SaveChangesAsync();
-
 
                 if (items != null)
                 {
@@ -99,9 +70,10 @@ namespace ProductManagementSystem.MauiClient.ViewModels
                     IsError = true;
                     ErrorMessage = "No data returned from server.";
                 }
+
                 Items.Clear();
 
-                // Veritabanından verileri çek ve CollectionView'i güncelle
+                // Retrieve data from the database and update the CollectionView
                 var products = await _dbContext.Products.ToListAsync();
                 foreach (var product in products)
                 {
@@ -122,12 +94,6 @@ namespace ProductManagementSystem.MauiClient.ViewModels
             {
                 IsLoading = false;
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
