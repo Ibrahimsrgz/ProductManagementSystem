@@ -2,34 +2,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProductManagementSystem.MauiClient.Pages.ProductListPage"
              Title="Second Page">
-
-    <VerticalStackLayout Padding="10">
-        <!-- Yükleme süreci için ActivityIndicator -->
-        <ActivityIndicator IsRunning="{Binding IsLoading}" 
+    <ScrollView>
+        <VerticalStackLayout Padding="10">
+            <ActivityIndicator IsRunning="{Binding IsLoading}" 
                            IsVisible="{Binding IsLoading}" 
                            VerticalOptions="Center"
                            HorizontalOptions="Center" />
-
-        <!-- Hata mesajını göstermek için -->
-        <Label Text="{Binding ErrorMessage}" 
+            <Label Text="{Binding ErrorMessage}" 
                TextColor="Red"
                IsVisible="{Binding IsError}" 
                HorizontalOptions="Center" 
                VerticalOptions="Center"/>
-
-        <!-- Gelen verileri listelemek için CollectionView -->
-        <CollectionView ItemsSource="{Binding Items}"
+            <CollectionView ItemsSource="{Binding Items}"
                         IsVisible="{Binding IsNotLoadingAndNotError}"
                         VerticalOptions="FillAndExpand">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="10">
-                        <Label Text="{Binding Product.Name}" 
-                               VerticalOptions="Center" 
-                               HorizontalOptions="Start"/>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Frame Padding="5" HasShadow="False" BackgroundColor="#E0E0E0" CornerRadius="5" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Start">
+                                <Label Text="{Binding Name}"
+                                        VerticalOptions="Center" 
+                                        HorizontalOptions="Start"
+                                        TextColor="Blue">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnItemTapped" CommandParameter="{Binding .}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
